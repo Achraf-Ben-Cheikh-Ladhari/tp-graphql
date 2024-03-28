@@ -4,7 +4,11 @@ pipeline {
   /*parameters{
     choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'])
   }*/
-
+  environment {
+    registry = "achrafladhari/graphql"
+    registryCredential = 'docker'
+    dockerImage = ''
+  }
   //build on push
   triggers {
     pollSCM('') 
@@ -44,11 +48,26 @@ pipeline {
         }
       }
     }
+    stage('Building our image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
     stage("deploy") {
       steps {
         script {
           gv.deployApp()
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
         }
+      }
+    }
+    stage('Cleaning up') {
+      steps{
+      sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
   }
