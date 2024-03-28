@@ -11,7 +11,7 @@ pipeline {
           gv = load "script.groovy"
         }
         nodejs("20.11.0") {
-          sh 'yarn install'
+          sh 'npm install'
         }
       }
     }
@@ -32,10 +32,12 @@ pipeline {
         script {
           gv.testApp()
         }
+        nodejs("20.11.0"){
         sh '''
-        yarn install --save-dev jest --global --force
+        npm install --save-dev jest --global --force
         jest tests/user.test.js
         '''
+        }
       }
     }
     stage("deploy") {
