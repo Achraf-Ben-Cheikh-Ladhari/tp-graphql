@@ -48,12 +48,10 @@ pipeline {
         }
       }
     }
-    stage('Building our image') {
+    stage('Building docker image') {
       steps{
         script{
-          docker("docker-latest") {
-            dockerImage = docker.build registry + ":$BUILD_NUMBER"
-          }
+          sh 'docker build -t graphql/devops-graphql .'
         }
       }
     }
@@ -61,9 +59,9 @@ pipeline {
       steps {
         script {
           gv.deployApp()
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
+          withCredentials([string(credentialsId:'dockerhub-pwd', variable:'dockerhubpwd')])
+          sh "docker login -u achrafladhari -p ${dockerhubpwd}"
+          sh "docker push graphql/devops-graphql"
         }
       }
     }
