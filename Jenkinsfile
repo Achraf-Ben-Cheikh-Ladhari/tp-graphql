@@ -34,8 +34,8 @@ pipeline {
         }
         nodejs("20.11.0"){
         sh '''
-        yarn install --save-dev jest --global --force
-        jest tests/user.test.js
+          yarn global add jest --force
+          jest tests/user.test.js
         '''
         }
       }
