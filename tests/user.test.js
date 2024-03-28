@@ -1,6 +1,6 @@
 const taskResolver = require('../taskResolver');
 describe('Task Resolver', () => {
-    
+
   test('should return a task by id', () => {
     const task = taskResolver.task({ id: '1' });
     expect(task.id).toBe('1');
@@ -63,7 +63,7 @@ test('should return all tasks', () => {
 
   test('should change the description of a task', () => {
     const taskId = '4';
-    const newDescription = 'Updated description for task 4';
+    const newDescription = 'Updated description for task 4 LADHARI ACHRAF';
     taskResolver.changeDescription({ id: taskId, description: newDescription });
     const task = taskResolver.task({ id: taskId });
     expect(task.description).toBe(newDescription);
