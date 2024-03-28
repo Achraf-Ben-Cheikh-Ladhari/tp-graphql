@@ -33,10 +33,8 @@ pipeline {
           gv.testApp()
         }
         nodejs("20.11.0"){
-        sh '''
-          yarn global add jest --force
-          jest tests/user.test.js
-        '''
+        sh 'yarn global add jest --force'
+        sh 'jest tests/user.test.js'
         }
       }
     }
