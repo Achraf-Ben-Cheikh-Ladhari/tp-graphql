@@ -33,7 +33,7 @@ pipeline {
           gv.testApp()
         }
         sh '''
-        npm install --save-dev jest --global --force
+        yarn install --save-dev jest --global --force
         jest tests/user.test.js
         '''
       }
