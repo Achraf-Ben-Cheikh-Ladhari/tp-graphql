@@ -33,11 +33,6 @@ pipeline {
       }
     }
     stage("test") {
-      when {
-        expression {
-          BRANCH_NAME == 'test' || BRANCH_NAME == 'main'
-        }
-      }
       steps {
         script {
           gv.testApp()
