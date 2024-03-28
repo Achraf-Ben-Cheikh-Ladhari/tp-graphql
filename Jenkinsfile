@@ -1,15 +1,15 @@
 def gv
 pipeline {
   agent any
-  parameters{
+  /*parameters{
     choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'])
-  }
+  }*/
 
   //build on push
   triggers {
     pollSCM('') 
   }
-  
+
   stages{
     stage("init") {
       steps {
