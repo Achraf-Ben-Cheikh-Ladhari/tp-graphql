@@ -11,7 +11,7 @@ pipeline {
           gv = load "script.groovy"
         }
         nodejs("20.11.0") {
-          sh 'yarn i'
+          sh 'yarn install'
         }
       }
     }
