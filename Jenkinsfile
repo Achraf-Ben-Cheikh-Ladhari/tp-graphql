@@ -1,52 +1,52 @@
 def gv
-pipeline{
+pipeline {
   agent any
   parameters{
     choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'])
   }
   stages{
-    stage("init"){
-      steps{
-        script{
-          gv = load script.groovy
+    stage("init") {
+      steps {
+        script {
+          gv = load "script.groovy"
         }
-        nodejs("20.11.0"){
+        nodejs("20.11.0") {
           sh 'yarn i'
         }
       }
     }
-    stage("build"){
-      steps{
-        script{
+    stage("build") {
+      steps {
+        script {
           gv.buildApp()
         }
       }
     }
-    stage("test"){
-      when{
-        expression{
+    stage("test") {
+      when {
+        expression {
           BRANCH_NAME == 'test'
         }
       }
-      steps{
-        script{
+      steps {
+        script {
           gv.testApp()
         }
       }
     }
-    stage("deploy"){
-      steps{
-        script{
+    stage("deploy") {
+      steps {
+        script {
           gv.deployApp()
         }
       }
     }
   }
-  post{
-    success{
+  post {
+    success {
       echo 'SUCCESS !'
     }
-    failure{
+    failure {
       echo 'Failure !'
     }
   }
