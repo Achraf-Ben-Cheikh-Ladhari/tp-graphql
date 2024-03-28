@@ -34,7 +34,7 @@ pipeline {
         }
         nodejs("20.11.0"){
         sh 'yarn global add jest --force'
-        sh 'ls -l'
+        sh './node_modules/.bin/jest tests/user.test.js'
         }
       }
     }
