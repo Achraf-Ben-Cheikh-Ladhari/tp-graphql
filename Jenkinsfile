@@ -11,7 +11,7 @@ pipeline {
           gv = load "script.groovy"
         }
         nodejs("20.11.0") {
-          sh 'yarn install'
+          sh 'npm install'
         }
       }
     }
@@ -25,13 +25,17 @@ pipeline {
     stage("test") {
       when {
         expression {
-          BRANCH_NAME == 'test'
+          BRANCH_NAME == 'test' || BRANCH_NAME == 'main'
         }
       }
       steps {
         script {
           gv.testApp()
         }
+        sh '''
+        npm install --save-dev jest --global --force
+        jest tests/user.test.js
+        '''
       }
     }
     stage("deploy") {
