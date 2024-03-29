@@ -42,7 +42,7 @@ pipeline {
     }
     stage('Building docker image') {
       steps{
-        sh 'docker build -t achrafladhari/devops-graphql .'
+        sh "docker build -t achrafladhari/devops-graphql:${BUILD_ID} ."
       }
     }
     stage("deploy") {
@@ -51,7 +51,7 @@ pipeline {
           gv.deployApp()
           withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
             sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-            sh "docker push achrafladhari/devops-graphql"
+            sh "docker push achrafladhari/devops-graphql:${BUILD_ID}"
           }
         }
       }

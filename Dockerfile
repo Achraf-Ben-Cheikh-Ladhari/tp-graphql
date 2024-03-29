@@ -1,12 +1,20 @@
-FROM node:20.11.0
+FROM node:20.11.0-alpine AS build
 
 WORKDIR /app
 
-COPY package.json yarn.lock /app/
+COPY package.json yarn.lock ./
 
-RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lockfile --production=true
 
-COPY . /app/
+COPY . .
+
+FROM node:20.11.0-alpine
+
+WORKDIR /app
+
+COPY --from=build /app/node_modules ./node_modules
+
+COPY --from=build /app ./
 
 EXPOSE 3000
 
