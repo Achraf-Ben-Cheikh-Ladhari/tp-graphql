@@ -42,7 +42,7 @@ pipeline {
     }
     stage('Building docker image') {
       steps{
-        sh 'docker build -t devops-graphql .'
+        sh 'docker build -t achrafladhari/devops-graphql .'
       }
     }
     stage("deploy") {
