@@ -1,6 +1,8 @@
 def gv
 pipeline {
-  agent any
+  agent {
+    label:'docker-agent'
+  }
   /*environment {
     registry = "achrafladhari/graphql"
     registryCredential = 'docker'
