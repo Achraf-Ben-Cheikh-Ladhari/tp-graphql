@@ -51,7 +51,7 @@ pipeline {
           gv.deployApp()
           withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
             sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-            sh "docker push devops-graphql"
+            sh "docker push achrafladhari/devops-graphql"
           }
         }
       }
