@@ -19,7 +19,7 @@
 
 -   NodeJS : Installez Nodejs depuis le site officiel https://nodejs.org/en/download
 
-Sur ubuntu
+Sur ubuntu 23.04
 ```bash
   sudo snap install node --classic
 ```
