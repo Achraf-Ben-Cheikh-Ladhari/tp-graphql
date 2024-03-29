@@ -1,14 +1,14 @@
 def gv
 pipeline {
   agent any
-  environment {
+  /*environment {
     registry = "achrafladhari/graphql"
     registryCredential = 'docker'
     dockerImage = ''
-  }
+  }*/
   //build on push
   triggers {
-    pollSCM('') 
+    pollSCM('*') 
   }
 
   stages{
