@@ -8,7 +8,7 @@ pipeline {
   }*/
   //build on push
   triggers {
-    pollSCM('*') 
+    pollSCM('* * * * *') 
   }
 
   stages{
