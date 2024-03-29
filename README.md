@@ -38,7 +38,7 @@ Sur ubuntu
   npm install --global yarn
   yarn install
 ```
-- Exécuter le test : 
+- Exécuter les tests : 
 ```bash
   npx jest
 ```
