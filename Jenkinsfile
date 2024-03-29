@@ -49,9 +49,10 @@ pipeline {
       steps {
         script {
           gv.deployApp()
-          withCredentials([string(credentialsId:'dockerhub-pwd', variable:'dockerhubpwd')])
-          sh "docker login -u achrafladhari -p ${dockerhubpwd}"
-          sh "docker push graphql/devops-graphql"
+          withCredentials([string(credentialsId:'dockerhub-pwd', variable:'dockerhubpwd')]){
+            sh "docker login -u achrafladhari -p ${dockerhubpwd}"
+            sh "docker push graphql/devops-graphql"
+          }
         }
       }
     }
