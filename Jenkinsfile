@@ -35,7 +35,7 @@ pipeline {
           gv.testApp()
         }
         nodejs("20.11.0"){
-        //sh 'yarn global add jest --force'
+
         sh 'npx jest'
         }
       }
